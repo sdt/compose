@@ -30,8 +30,13 @@ import (
 )
 
 func (s *composeService) Events(ctx context.Context, project string, options api.EventsOptions) error {
+	eventFilters := filters.NewArgs(projectFilter(project))
+	for _, eventName := range options.Events {
+		eventFilter := eventTypeFilter(eventName)
+		eventFilters.Add(eventFilter.Key, eventFilter.Value)
+	}
 	events, errors := s.apiClient.Events(ctx, moby.EventsOptions{
-		Filters: filters.NewArgs(projectFilter(project)),
+		Filters: eventFilters,
 	})
 	for {
 		select {

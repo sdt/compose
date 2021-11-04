@@ -46,3 +46,7 @@ func containerNumberFilter(index int) filters.KeyValuePair {
 func hasProjectLabelFilter() filters.KeyValuePair {
 	return filters.Arg("label", api.ProjectLabel)
 }
+
+func eventTypeFilter(eventType string) filters.KeyValuePair {
+	return filters.Arg("event", eventType)
+}

@@ -234,6 +234,8 @@ type RunOptions struct {
 // EventsOptions group options of the Events API
 type EventsOptions struct {
 	Services []string
+	// Event types to subscribe to. An empty list means all events.
+	Events   []string
 	Consumer func(event Event) error
 }
 
