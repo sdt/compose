@@ -93,6 +93,7 @@ func (s *composeService) watchContainers(ctx context.Context, projectName string
 	ctx, stop := context.WithCancel(ctx)
 	err := s.Events(ctx, projectName, api.EventsOptions{
 		Services: services,
+		Events:   []string{"die", "start"},
 		Consumer: func(event api.Event) error {
 			inspected, err := s.apiClient.ContainerInspect(ctx, event.Container)
 			if err != nil {
